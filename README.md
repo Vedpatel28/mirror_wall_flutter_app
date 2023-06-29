@@ -33,6 +33,7 @@ enhance the knowledge and skills of IT students in mobile app development using 
 <img src = "https://github.com/Vedpatel28/mirror_wall_flutter_app/assets/130833918/7b25b05e-f67d-4d0e-b353-58be5f0dfd69" height = "350"></img>
 <img src = "https://github.com/Vedpatel28/mirror_wall_flutter_app/assets/130833918/8b560d38-148a-43bd-b0bb-e6b6f6cd9e1d" height = "350"></img>
 <img src = "https://github.com/Vedpatel28/mirror_wall_flutter_app/assets/130833918/9046fbc3-0b28-4f7f-a739-f75e7c53800b" height = "350"></img>
+<img src = "https://github.com/Vedpatel28/mirror_wall_flutter_app/assets/130833918/d20fb221-413b-4e88-b4bd-2813796d5dfa" height = "350"></img>
 <img src = "https://github.com/Vedpatel28/mirror_wall_flutter_app/assets/130833918/4e448995-eff0-4a4d-88ae-1aabf9116dfb" height = "350"></img>
 <img src = "https://github.com/Vedpatel28/mirror_wall_flutter_app/assets/130833918/558abc0f-7440-4fe6-9e78-028f2abfa9ad" height = "350"></img>
 <img src = "https://github.com/Vedpatel28/mirror_wall_flutter_app/assets/130833918/0809298d-8b79-4148-b0dc-4725bcb45684" height = "350"></img>
