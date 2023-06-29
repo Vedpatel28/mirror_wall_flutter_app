@@ -43,17 +43,159 @@ class _web_view_pageState extends State<web_view_page> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey,
-        leading: const Icon(
-          Icons.menu_outlined,
-          size: 25,
+        leading: PopupMenuButton(
+          initialValue: 2,
+          itemBuilder: (context) {
+            return [
+              PopupMenuItem(
+                value: index,
+                child: GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Row(
+                            children: [
+                              const Spacer(),
+                              const Icon(Icons.close),
+                              SizedBox(width: s.width * 0.02),
+                              const Text("DISMISS"),
+                              const Spacer(),
+                            ],
+                          ),
+                        ),
+                        content: const Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text("No Any BookMarks Yet..."),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Row(
+                    children: [
+                      Icon(Icons.bookmark, size: 20, color: Colors.grey),
+                      SizedBox(width: 15),
+                      Text("All Bookmark"),
+                    ],
+                  ),
+                ),
+              ),
+              PopupMenuItem(
+                value: index,
+                child: GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text("Search Engine"),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            // Google
+                            Row(
+                              children: [
+                                Radio(
+                                  value: 1,
+                                  groupValue: index,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      index = value!;
+                                      Navigator.of(context).pop();
+                                    });
+                                  },
+                                ),
+                                SizedBox(width: s.width * 0.02),
+                                const Text("Google"),
+                              ],
+                            ),
+                            // Yahoo
+                            Row(
+                              children: [
+                                Radio(
+                                  value: 2,
+                                  groupValue: index ,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      index = value!;
+                                      Navigator.of(context).pop();
+                                    });
+                                  },
+                                ),
+                                SizedBox(width: s.width * 0.02),
+                                const Text("Yahoo"),
+                              ],
+                            ),
+                            // Bing
+                            Row(
+                              children: [
+                                Radio(
+                                  value: 3,
+                                  groupValue: index,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      index = value!;
+                                      Navigator.of(context).pop();
+                                    });
+                                  },
+                                ),
+                                SizedBox(width: s.width * 0.02),
+                                const Text("Bing"),
+                              ],
+                            ),
+                            // Duck Duck Go
+                            Row(
+                              children: [
+                                Radio(
+                                  value: 4,
+                                  groupValue: index,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      index = value!;
+                                      Navigator.of(context).pop();
+                                    });
+                                  },
+                                ),
+                                SizedBox(width: s.width * 0.02),
+                                const Text("DuckDuckGO"),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Row(
+                    children: [
+                      Icon(Icons.screen_search_desktop_outlined,
+                          size: 20, color: Colors.grey),
+                      SizedBox(width: 15),
+                      Text("Search Engine"),
+                    ],
+                  ),
+                ),
+              ),
+            ];
+          },
+          offset: const Offset(0, 45),
+          child: const Center(
+            child: Icon(Icons.more_vert_outlined),
+          ),
         ),
         title: Container(
           decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(10))
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
           ),
           height: s.height * 0.06,
-          width: s.width*16,
+          width: s.width * 16,
           // padding: const EdgeInsets.only(top: 20,bottom: 50),
           child: TextField(
             onSubmitted: (value) {
@@ -67,7 +209,8 @@ class _web_view_pageState extends State<web_view_page> {
             decoration: const InputDecoration(
               border: InputBorder.none,
               hintText: "Search ",
-              prefixIcon: Icon(Icons.search_outlined,size: 20,color: Colors.black),
+              prefixIcon:
+                  Icon(Icons.search_outlined, size: 20, color: Colors.black),
             ),
           ),
         ),
