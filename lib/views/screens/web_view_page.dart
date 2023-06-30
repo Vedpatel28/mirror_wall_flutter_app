@@ -1,9 +1,8 @@
 // ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mirror_wall_flutter_app/modals/list_search_engine.dart';
-import 'package:mirror_wall_flutter_app/utils/routes_utils.dart';
 
 class web_view_page extends StatefulWidget {
   const web_view_page({super.key});
@@ -15,12 +14,11 @@ class web_view_page extends StatefulWidget {
 class _web_view_pageState extends State<web_view_page> {
   InAppWebViewController? webViewController;
   PullToRefreshController? refreshController;
-
   double progress = 0;
-
   late var url;
-
+  String bookmarkadd = '';
   var urlController = TextEditingController();
+  List bookmark = [];
 
   @override
   void initState() {
@@ -51,29 +49,33 @@ class _web_view_pageState extends State<web_view_page> {
                 value: index,
                 child: GestureDetector(
                   onTap: () {
-                    showDialog(
+                    showModalBottomSheet(
                       context: context,
-                      builder: (context) => AlertDialog(
-                        title: GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Row(
-                            children: [
-                              const Spacer(),
-                              const Icon(Icons.close),
-                              SizedBox(width: s.width * 0.02),
-                              const Text("DISMISS"),
-                              const Spacer(),
-                            ],
-                          ),
-                        ),
-                        content: const Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text("No Any BookMarks Yet..."),
-                          ],
-                        ),
+                      builder: (context) => Container(
+                        height: s.height * 0.5,
+                        color: Colors.white,
+                        child: Column(children: [
+                          Container(
+                              child: Column(
+                            children: List.generate(
+                              growable: true,
+                              bookmark.length,
+                              (index) => Column(
+                                children: [
+                                  ListTile(
+                                    title: Text("${bookmark[index]}"),
+                                    trailing: IconButton(
+                                      onPressed: () {
+                                        bookmark.removeAt(index);
+                                      },
+                                      icon: const Icon(Icons.close),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )),
+                        ]),
                       ),
                     );
                   },
@@ -119,7 +121,7 @@ class _web_view_pageState extends State<web_view_page> {
                               children: [
                                 Radio(
                                   value: 2,
-                                  groupValue: index ,
+                                  groupValue: index,
                                   onChanged: (value) {
                                     setState(() {
                                       index = value!;
@@ -219,14 +221,16 @@ class _web_view_pageState extends State<web_view_page> {
         children: [
           Expanded(
             child: InAppWebView(
-              onLoadStop: (controller, url) {
-                refreshController!.endRefreshing();
-              },
               onLoadStart: (controller, url) {
                 var v = url.toString();
+                bookmarkadd = v;
                 setState(() {
                   urlController.text = v;
                 });
+              },
+              onLoadStop: (controller, url) {
+                // bookmark.add(v);
+                refreshController!.endRefreshing();
               },
               pullToRefreshController: refreshController,
               onWebViewCreated: (controller) => webViewController = controller,
@@ -245,13 +249,34 @@ class _web_view_pageState extends State<web_view_page> {
             const Spacer(),
             IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(AllRoutes.HomePage);
+                Navigator.of(context).pop();
               },
               icon: const Icon(Icons.home_rounded),
             ),
             const Spacer(),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                bookmark.add(bookmarkadd);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: Colors.white,
+                    padding: const EdgeInsets.all(8),
+                    clipBehavior: Clip.antiAlias,
+                    duration: const Duration(seconds: 3),
+                    behavior: SnackBarBehavior.floating,
+                    animation: const AlwaysStoppedAnimation(2),
+                    content: Text(
+                      "Added Successful",
+                      style: GoogleFonts.dmSerifText(
+                        textStyle: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.greenAccent,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
               icon: const Icon(Icons.bookmark_add_outlined),
             ),
             const Spacer(),
@@ -286,3 +311,29 @@ class _web_view_pageState extends State<web_view_page> {
     );
   }
 }
+
+// showDialog(
+//   context: context,
+//   builder: (context) => AlertDialog(
+//     title: GestureDetector(
+//       onTap: () {
+//         Navigator.of(context).pop();
+//       },
+//       child: Row(
+//         children: [
+//           const Spacer(),
+//           const Icon(Icons.close),
+//           SizedBox(width: s.width * 0.02),
+//           const Text("DISMISS"),
+//           const Spacer(),
+//         ],
+//       ),
+//     ),
+//     content: const Column(
+//       mainAxisSize: MainAxisSize.min,
+//       children: [
+//         Text("No Any BookMarks Yet..."),
+//       ],
+//     ),
+//   ),
+// );
