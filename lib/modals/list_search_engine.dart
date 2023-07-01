@@ -1,6 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
-
-import 'package:mirror_wall_flutter_app/utils/web_utils.dart';
+import 'package:mirror_wall_flutter_app/modals/web_utils.dart';
 
 List<Map<String, String>> AllWebList = [
   {
