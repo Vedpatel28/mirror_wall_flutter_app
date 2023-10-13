@@ -2,7 +2,7 @@
 
 ## Project Viedo :
 
-https://github.com/Vedpatel28/mirror_wall_flutter_app/assets/130833918/ce2f280a-f742-4e92-878e-c7798277bd2b
+https://github.com/Vedpatel28/mirror_wall_flutter_app/assets/130833918/59b6abb7-eba4-469a-b3fd-573d1bf270f0
 
 ## Project Description:
 
